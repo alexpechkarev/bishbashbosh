@@ -68,7 +68,10 @@ main .hero-list > div {
   font-size: 20rem;
   font-weight: bold;
   cursor: none;
+  min-width: 850px;
+  min-height: 450px;
 }
 main .hero-list > div:hover {
   color: black;
+  font-size: 0rem;
 }

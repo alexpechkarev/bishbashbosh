@@ -164,12 +164,13 @@ scroll.play();
 const texts = [...document.querySelectorAll('.hero-list > div')];
 const bgTime = 1;
 let currentAnim;
+let textHolder;
 
 function resetAnimateBg(element) {
   currentAnim.kill();
   currentAnim = null;
   [...element.children].forEach(el => {
-    el.style.opacity = 0;
+      el.style.opacity = 0;
   });
 }
 
@@ -179,6 +180,8 @@ texts.forEach(el => {
      particlePaused = true;
      setColorToParticles(el.dataset.index);
      animateBg(el);
+     
+
   });
     el.addEventListener('mouseleave', () => {
       scroll.play();
