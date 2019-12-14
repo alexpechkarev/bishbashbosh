@@ -172,6 +172,7 @@ function resetAnimateBg(element) {
   [...element.children].forEach(el => {
       el.style.opacity = 0;
   });
+  document.getElementsByTagName("menu")[0].style.backgroundImage = "url()";
 }
 
 texts.forEach(el => {
@@ -192,5 +193,27 @@ texts.forEach(el => {
 
 function animateBg(element) {
   currentAnim = new TimelineMax({repeat: -1,  paused: true});
-  currentAnim.staggerTo([...element.children, {}], 0, {opacity: 1, ease: Linear.easeNone}, .5).play();
+
+  let arr = [];
+[...element.children, {}].forEach(el =>{
+  
+    if( typeof el.style !== 'undefined'){
+      
+      arr.push(el.style.backgroundImage.slice(4, -1).replace(/"/g, ""));
+
+    }    
+  });
+
+  let cnt = 0;
+  
+
+  let onCompleteScaleIn = function(){
+    
+    if( cnt >= arr.length){ cnt = 0;}
+    document.getElementsByTagName("menu")[0].style.backgroundImage = "url('"+arr[cnt]+"')";
+
+    cnt++;
+  }
+  //console.log(arr);
+  currentAnim.staggerTo([...element.children, {}], 0, {opacity: 0, ease: Linear.easeNone, onComplete: onCompleteScaleIn}, .7).play();
 }
